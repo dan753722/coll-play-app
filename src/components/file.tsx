@@ -1,22 +1,12 @@
-import * as React from 'react';
-
 import { Note } from '@material-ui/icons';
+import * as React from 'react';
+import {IListItemProps} from './common';
 
 // interface IDataItem {
 //     type: ListItemTypeEnum,
 //     name: string,
 //     children: IDataItem[]
 // }
-
-export enum ListItemTypeEnum {
-    Folder='folder',
-    File='file'
-}
-
-interface IListItemProps {
-    ItemType: ListItemTypeEnum,
-    name: string
-}
 
 interface IFileProps extends IListItemProps {
     size: number

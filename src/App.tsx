@@ -3,7 +3,9 @@ import './App.css';
 
 import logo from './logo.svg';
 
-import File, {ListItemTypeEnum} from './components/file';
+import {ListItemTypeEnum} from './components/common';
+import File from './components/file';
+import FolderInfo from './components/folderInfo';
 
 class App extends React.Component {
   public render() {
@@ -15,8 +17,10 @@ class App extends React.Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
-          <File name={'hello'} size={1000} ItemType={ListItemTypeEnum.File} />
         </p>
+
+        <File name={'hello'} size={1000} itemType={ListItemTypeEnum.File} />
+        <FolderInfo name={'a folder'} itemType={ListItemTypeEnum.Folder} open={false} />
       </div>
     );
   }
