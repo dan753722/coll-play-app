@@ -1,12 +1,7 @@
+import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import { Note } from '@material-ui/icons';
 import * as React from 'react';
 import {IListItemProps} from './common';
-
-// interface IDataItem {
-//     type: ListItemTypeEnum,
-//     name: string,
-//     children: IDataItem[]
-// }
 
 interface IFileProps extends IListItemProps {
     size: number
@@ -19,7 +14,7 @@ class File extends React.Component<IFileProps> {
     }
 
     public render() {
-        return <div><Note/><span>{this.props.name}</span><span>{this.fileSizeConverter(this.props.size)}</span></div>;
+        return <ListItem><ListItemIcon><Note/></ListItemIcon><ListItemText>{this.props.name}</ListItemText><span>{this.fileSizeConverter(this.props.size)}</span></ListItem>;
     }
 
     private fileSizeConverter(size: number): string {
