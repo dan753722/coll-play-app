@@ -12,7 +12,7 @@ configure({ adapter: new Adapter() });
 
 describe('file list item component', () => {
     chai.use(chaiEnzyme());
-    let fileComponent: ShallowWrapper<any, {}, File>;
+    let fileComponent: ShallowWrapper<any, {}, any>;
     const name = 'name';
     const size = 100;
 
@@ -21,15 +21,15 @@ describe('file list item component', () => {
     })
 
     it('should display file icon', () => {        
-        chai.expect(fileComponent.find(Note)).to.have.lengthOf(1);
+        chai.expect(fileComponent.dive().find(Note)).to.have.lengthOf(1);
     });
 
     it('should display file name', () => {
-        chai.expect(fileComponent.contains(name)).to.equal(true);
+        chai.expect(fileComponent.dive().contains(name)).to.equal(true);
     });
 
     it('should display file size', () => {
-        chai.expect(fileComponent.contains(`100 B`)).to.equal(true);
+        chai.expect(fileComponent.dive().contains(`100 B`)).to.equal(true);
     });
 });
 

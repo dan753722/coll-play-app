@@ -1,17 +1,25 @@
 import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {Folder, FolderOpen, ChevronRight, ExpandMore} from '@material-ui/icons';
 import * as React from 'react';
+import {withStyles} from '@material-ui/core/styles';
 
 import {IListItemProps} from './common';
 
 interface IFolderInfoProps extends IListItemProps {
     open: boolean,
     hasChildren: boolean,
-    onClick?: () => void
+    onClick?: () => void,
+    classes: any
 }
 
 export const ShowMore = ChevronRight;
 export const ShowLess = ExpandMore;
+
+const styles = (theme: any) => ({
+    emptyfolderItem: {
+        paddingLeft: theme.spacing.unit * 6
+    }
+});
 
 class FolderInfo extends React.Component<IFolderInfoProps> {
     constructor(props: IFolderInfoProps) {
@@ -21,7 +29,7 @@ class FolderInfo extends React.Component<IFolderInfoProps> {
     }
 
     public render() {
-        return <ListItem button={this.props.hasChildren} onClick={this.handleClick}>{this.renderArrowSign()}<ListItemIcon>{this.props.open ? <FolderOpen/> : <Folder />}</ListItemIcon><ListItemText>{this.props.name}</ListItemText></ListItem>;
+        return <ListItem className={!this.props.hasChildren ? this.props.classes.emptyfolderItem : ''} button={this.props.hasChildren} onClick={this.handleClick}>{this.renderArrowSign()}<ListItemIcon>{this.props.open ? <FolderOpen/> : <Folder />}</ListItemIcon><ListItemText>{this.props.name}</ListItemText></ListItem>;
     }
 
     private handleClick(e: any) {
@@ -42,4 +50,4 @@ class FolderInfo extends React.Component<IFolderInfoProps> {
     }
 }
 
-export default FolderInfo;
+export default withStyles(styles)(FolderInfo);

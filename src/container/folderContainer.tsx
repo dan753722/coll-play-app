@@ -3,14 +3,25 @@ import * as React from 'react';
 import { IDataItem, ListItemTypeEnum } from '../components/common';
 import File from '../components/file';
 import FolderInfo from '../components/folderInfo';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (theme: any) => ({
+    nested: {
+        paddingLeft: theme.spacing.unit * 6,
+    }
+});
 
 interface IFolderContainerState {
     open: boolean
 }
 
-class FolderContainer extends React.Component<IDataItem, IFolderContainerState> {
+interface IFolderContainerProps extends IDataItem {
+    classes: any
+}
 
-    constructor(props: IDataItem) {
+class FolderContainer extends React.Component<IFolderContainerProps, IFolderContainerState> {
+
+    constructor(props: IFolderContainerProps) {
         super(props);
         this.state = {
             open: false
@@ -27,10 +38,11 @@ class FolderContainer extends React.Component<IDataItem, IFolderContainerState> 
         return (
             <div>
             <FolderInfo open={this.state.open} name={this.props.name} itemType={this.props.type} hasChildren={hasChildren} onClick={this.toggleFolderOpen}/>
-            {hasChildren}
             <Collapse in={this.state.open}>
-                <List component='div' disablePadding={true}>
-                    {this.props.children ? this.props.children.map((data: IDataItem, index) => (<FolderContainer key={index} type={data.type} name={data.name} children={data.children} size={data.size} />)) : (null)}
+                <List component='div' disablePadding={true} className={this.props.classes.nested}>
+                    {
+                        this.props.children ? this.props.children.map((data: IDataItem, index) => (<FolderContainerWithStyle key={index} type={data.type} name={data.name} children={data.children} size={data.size} />)) : (null)
+                    }
                 </List>
             </Collapse>
             </div>
@@ -41,4 +53,7 @@ class FolderContainer extends React.Component<IDataItem, IFolderContainerState> 
         this.setState({open: !this.state.open});
     }
 }
-export default FolderContainer;
+
+const FolderContainerWithStyle = withStyles(styles)(FolderContainer);
+
+export default FolderContainerWithStyle;

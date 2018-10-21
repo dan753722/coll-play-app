@@ -14,53 +14,53 @@ configure({ adapter: new Adapter() });
 
 describe('file list item component', () => {
     chai.use(chaiEnzyme());
-    let folderInfoComponent: ShallowWrapper<any, {}, FolderInfo>;
+    let folderInfoComponent: ShallowWrapper<any, {}, any>;
     const name = 'name';
 
     it('should display open folder icon', () => {
-        folderInfoComponent = shallow(<FolderInfo name={name} open={true} itemType={ListItemTypeEnum.Folder} hasChildren={false}/>);        
-        chai.expect(folderInfoComponent.find(FolderOpen)).to.have.lengthOf(1);
+        folderInfoComponent = shallow(<FolderInfo name={name} open={true} itemType={ListItemTypeEnum.Folder} hasChildren={false}/>);       
+        chai.expect(folderInfoComponent.dive().find(FolderOpen)).to.have.lengthOf(1);
     });
 
     it('should display folder icon', () => {
         folderInfoComponent = shallow(<FolderInfo name={name} open={false} itemType={ListItemTypeEnum.Folder} hasChildren={false}/>);        
-        chai.expect(folderInfoComponent.find(Folder)).to.have.lengthOf(1);
+        chai.expect(folderInfoComponent.dive().find(Folder)).to.have.lengthOf(1);
     });
 
     it('should display file name', () => {
         folderInfoComponent = shallow(<FolderInfo name={name} open={true} itemType={ListItemTypeEnum.Folder} hasChildren={false}/>);
-        chai.expect(folderInfoComponent.contains(name)).to.equal(true);
+        chai.expect(folderInfoComponent.dive().contains(name)).to.equal(true);
     });
 
     it('should display folder icon and show more icon', () => {
         folderInfoComponent = shallow(<FolderInfo name={name} open={false} itemType={ListItemTypeEnum.Folder} hasChildren={true}/>);        
-        chai.expect(folderInfoComponent.find(Folder)).to.have.lengthOf(1);
-        chai.expect(folderInfoComponent.find(ShowMore)).to.have.lengthOf(1);
+        chai.expect(folderInfoComponent.dive().find(Folder)).to.have.lengthOf(1);
+        chai.expect(folderInfoComponent.dive().find(ShowMore)).to.have.lengthOf(1);
     });
 
     it('should display open folder icon and show less icon', () => {
         folderInfoComponent = shallow(<FolderInfo name={name} open={true} itemType={ListItemTypeEnum.Folder} hasChildren={true}/>);        
-        chai.expect(folderInfoComponent.find(FolderOpen)).to.have.lengthOf(1);
-        chai.expect(folderInfoComponent.find(ShowLess)).to.have.lengthOf(1);
+        chai.expect(folderInfoComponent.dive().find(FolderOpen)).to.have.lengthOf(1);
+        chai.expect(folderInfoComponent.dive().find(ShowLess)).to.have.lengthOf(1);
     });
 
     it('should display no show less/more icon', () => {
         folderInfoComponent = shallow(<FolderInfo name={name} open={true} itemType={ListItemTypeEnum.Folder} hasChildren={false}/>);
-        chai.expect(folderInfoComponent.find(ShowMore)).to.have.lengthOf(0);
-        chai.expect(folderInfoComponent.find(ShowLess)).to.have.lengthOf(0);
+        chai.expect(folderInfoComponent.dive().find(ShowMore)).to.have.lengthOf(0);
+        chai.expect(folderInfoComponent.dive().find(ShowLess)).to.have.lengthOf(0);
     });
 
     it('should fire click event', () => {
         const clickSpy = sinon.spy();
         folderInfoComponent = shallow(<FolderInfo name={name} open={true} itemType={ListItemTypeEnum.Folder} hasChildren={true} onClick={clickSpy} />);
-        folderInfoComponent.find(ListItem).simulate('click');
+        folderInfoComponent.dive().find(ListItem).simulate('click');
         chai.expect(clickSpy).to.have.property('callCount', 1);
     });
 
     it('should not fire click event', () => {
         const unFiredClickSpy = sinon.spy();
         folderInfoComponent = shallow(<FolderInfo name={name} open={false} itemType={ListItemTypeEnum.Folder} hasChildren={false} onClick={unFiredClickSpy} />);
-        folderInfoComponent.find(ListItem).simulate('click');
+        folderInfoComponent.dive().find(ListItem).simulate('click');
         chai.expect(unFiredClickSpy).to.have.property('callCount', 0);
     });
 });

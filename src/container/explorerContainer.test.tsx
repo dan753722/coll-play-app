@@ -25,7 +25,7 @@ describe('explorer container component', () => {
         return Promise.resolve(mockResponse); 
       }
 
-    let explorerContainerComponent: ShallowWrapper<any, {}, ExplorerContainer>;
+    let explorerContainerComponent: ShallowWrapper<any, {}, any>;
 
     afterEach(() => {
         sandbox.restore();
@@ -35,14 +35,14 @@ describe('explorer container component', () => {
         sandbox.stub(window, 'fetch').returns(jsonOK({data: []}));
         explorerContainerComponent = shallow(<ExplorerContainer />);
 
-        chai.expect(explorerContainerComponent.find(CircularProgress)).to.have.lengthOf(1);
+        chai.expect(explorerContainerComponent.dive().find(CircularProgress)).to.have.lengthOf(1);
     });
 
     it('should render explorerMetadata', () => {
         sandbox.stub(window, 'fetch').returns(jsonOK({data: []}));
         explorerContainerComponent = shallow(<ExplorerContainer />);
 
-        chai.expect(explorerContainerComponent.find('.explorerMetadata')).to.have.lengthOf(1);
+        chai.expect(explorerContainerComponent.dive().find('.explorerMetadata')).to.have.lengthOf(1);
     });
 
     it('should render one folderContainer', (done) => {
