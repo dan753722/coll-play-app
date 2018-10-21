@@ -11,6 +11,6 @@ export interface IListItemProps {
 export interface IDataItem {
     type: ListItemTypeEnum,
     name: string,
-    children: IDataItem[],
+    children?: IDataItem[],
     size?: number
 }
