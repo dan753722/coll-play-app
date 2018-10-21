@@ -1,8 +1,19 @@
 import {ListItemTypeEnum, IDataItem} from '../components/common';
 
+const REFERENCE_TABLE = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'BB']
+const BYTE_UNIT = 1000;
+
 export function fileSizeConverter(size: number): string {
     // to do: convert to kb, mb, gb automatically.
-    return `${size} B`;
+    let divisionCounter = 0;
+    let convertedSize = size;
+    while(Math.floor(convertedSize/BYTE_UNIT) > 0) {
+        convertedSize = Math.floor(convertedSize/BYTE_UNIT);
+        divisionCounter++;
+    }
+
+    
+    return `${convertedSize} ${REFERENCE_TABLE[divisionCounter]}`;
 }
 
 export function countFiles(data: IDataItem[]): number {

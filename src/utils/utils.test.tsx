@@ -151,6 +151,42 @@ describe('test util functions', () => {
         it('should return 100 B', () => {
             chai.assert.equal('100 B', fileSizeConverter(100));
         });
+
+        it('should return 1 KB', () => {
+            chai.assert.equal('1 KB', fileSizeConverter(1000));
+        });
+
+        it('should return 1 MB', () => {
+            chai.assert.equal('1 MB', fileSizeConverter(1000000));
+        });
+
+        it('should return 1 GB', () => {
+            chai.assert.equal('1 GB', fileSizeConverter(1000000000));
+        });
+
+        it('should return 1 TB', () => {
+            chai.assert.equal('1 TB', fileSizeConverter(1000000000000));
+        });
+
+        it('should return 1 PB', () => {
+            chai.assert.equal('1 PB', fileSizeConverter(1000000000000000));
+        });
+
+        it('should return 1 EB', () => {
+            chai.assert.equal('1 EB', fileSizeConverter(1000000000000000000));
+        });
+
+        it('should return 1 ZB', () => {
+            chai.assert.equal('1 ZB', fileSizeConverter(1000000000000000000000));
+        });
+
+        it('should return 1 YB', () => {
+            chai.assert.equal('1 YB', fileSizeConverter(1000000000000000000000000));
+        });
+
+        it('should return 1 BB', () => {
+            chai.assert.equal('1 BB', fileSizeConverter(1000000000000000000000000000));
+        });
     });
 
     describe('countFileSize method', () => {
